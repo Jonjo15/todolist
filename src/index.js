@@ -1,5 +1,6 @@
 import {Project} from "./projects";
 import {Todo} from "./todos";
+import {domElements, inputs} from "./dom"
 
 const projectManager =(function() {
     let projects = [];
@@ -58,7 +59,7 @@ function getTodoFromInput() {
     //let todo = new Todo()
 }
 
-
+console.log(inputs.todoPriority.value);
 function render() {
 
 }

@@ -8,11 +8,33 @@
 </head>
 <body>
     <div id="projects">
-
+        <form class="project">
+            <label for="name">Name of the new project: 
+                <input id="projectName" name="name" type="text" required>
+                <button id="submitProjectButton" type="button">Submit</button>
+            </label>
+            
+        </form>
         <button id="newProjectButton">New Project</button>
     </div>
     <div id="todos">
-
+        <form class="todos">
+            <label for="title">Title : 
+                <input id="todoTitle" name="title" type="text" required>
+            </label>
+            <label for="description">Description : 
+                <input id="todoDescription" name="description" type="text" required>
+            </label>
+            <label for="priority">Priority : </label>
+            <select id="priorityInput" name="cars">
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+              </select>
+              <label for="deadline">Pick a deadline:</label>
+              <input type="date" id="deadlineInput">
+              <button type="button" id="todoSubmitButton">Submit</button>
+        </form>
         <button id="newTodoButton">Add a Todo</button>
     </div>
     <script src="main.js"></script>
