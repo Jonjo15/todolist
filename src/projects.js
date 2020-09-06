@@ -1,13 +1,19 @@
 function Project(name) {
-    this.name = name;
-    this.todos = [];
+    //ovoo dovrsit!!!!!!!!!!!
+    this.name = name
+    let todos = [];
+    function getTodos() {
+        return todos;
+    }
     function addTodo(todo) {
-        this.todos.push(todo);
+        todos.push(todo);
     }
     function removeTodo(index) {
-        this.todos.splice(index, 1);
+        todos.splice(index, 1);
         //updateIndices();
     }
+
+    return { name, addTodo, removeTodo, getTodos}
 }
 
 export {Project};

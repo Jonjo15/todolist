@@ -20,22 +20,27 @@ const projectManager =(function() {
 
     function viewProjects() {
         projects.forEach((project) => {
-            console.log(project);
+            console.log(project.name);
+            //console.log(project.getTodos()[0].getTitle());
         })
     }
     function getCurrentProject() {
         return currentProject;
     }
-    /* function addTodoToProject(todo) {
-        currentProject.addTodo(todo);
-    }
+    // function addTodoToProject(todo) {
+    //     let todosArray = currentProject.getTodos();
+    //     todosArray.push(todo);
+    //     //currentProject.addTodo(todo);
+    // }
     function viewCurrentProjectsTodos() {
-        currentProject.todos.forEach((todo) => {
-            console.log(todo.getTitle())
-        });
-    } */
+        let todosArray = currentProject.getTodos();
+        todosArray.forEach((todo) => {
+            console.log(todo.getTitle());
+            console.log(todo.getDescription());
+        })
+    }
 
-    return {changeCurrentProject, addNewProject, deleteProject, viewProjects, getCurrentProject}
+    return {changeCurrentProject, addNewProject, deleteProject, viewProjects, getCurrentProject, viewCurrentProjectsTodos}
 })();
 
 (function setDefaultProject(){
@@ -43,12 +48,22 @@ const projectManager =(function() {
     let defaultTodo = new Todo("a", "b", "c", "d");
     projectManager.addNewProject(defaultProject);
     projectManager.changeCurrentProject(0);
-    projectManager.getCurrentProject().todos.push(defaultTodo);
+    projectManager.getCurrentProject().addTodo(defaultTodo);
 })();
 
+function getTodoFromInput() {
+    //titleinput
+    //descriptioninuptu
+    //priority, deadline
+    //let todo = new Todo()
+}
 
 
-projectManager.viewProjects();
-console.log(projectManager.getCurrentProject().name);
-projectManager.changeCurrentProject(0);
-console.log(projectManager.getCurrentProject().todos[0].getTitle());
+function render() {
+
+}
+
+//projectManager.viewProjects();
+//console.log(projectManager.getCurrentProject().getTodos()[0]);
+//projectManager.changeCurrentProject(0);
+//console.log(projectManager.getCurrentProject().tod.getTitle());
