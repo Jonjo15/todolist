@@ -16,4 +16,25 @@ function Todo(title, description, priority, deadline) {
     return {getDeadline, getDescription, getPriority, getTitle, setIndex, changeRenderedStatus, getIndex, getRenderedStatus}
 }
 
-export {Todo};
+function Project(name) {
+    //ovoo dovrsit!!!!!!!!!!!
+    this.name = name
+    this.rendered = false;
+    let todos = [];
+    const getName = () => this.name;
+    function getTodos() {
+        return todos;
+    }
+    function addTodo(todo) {
+        todos.push(todo);
+        todo.setIndex(todos.length -1);
+    }
+    function removeTodo(index) {
+        todos.splice(index, 1);
+        //updateIndices();
+    }
+
+    return { getName, addTodo, removeTodo, getTodos}
+}
+
+export {Todo, Project};

@@ -1,7 +1,6 @@
-import {Project} from "./projects";
-import {Todo} from "./todos";
-import {domElements, inputs} from "./dom"
 
+import {Todo, Project} from "./factories";
+import {domElements, getInputs} from "./dom"
 const projectManager =(function() {
     let projects = [];
     
@@ -50,6 +49,7 @@ const projectManager =(function() {
 })();
 
 function getTodoFromInput() {
+    let inputs = getInputs();
     //titleinput
     let titleValue = inputs.todoTitle.value;
     //descriptioninuptu
@@ -62,7 +62,7 @@ function getTodoFromInput() {
     return todo;
 }
 
-console.log(inputs.todoPriority.value);
+//console.log(inputs.todoPriority.value);
  
 export {getTodoFromInput, projectManager}
 //projectManager.viewProjects();

@@ -1,6 +1,5 @@
 import {getTodoFromInput, projectManager} from "./index"
-import {Project} from "./projects";
-import {Todo} from "./todos";
+import {Todo, Project} from "./factories";
 
 const domeElements =(function() {
     let projectsDiv = document.querySelector("#projects");
@@ -27,9 +26,12 @@ const domeElements =(function() {
         submitTodoButton.addEventListener("click", (e) => {
             //create todo Object
             let todo = getTodoFromInput();
+            console.log(todo.getTitle());
             //add it to the currentProject todos
             let currentProject = projectManager.getCurrentProject();
-            currentProject.addTodo(Todo);
+            currentProject.addTodo(todo);
+            console.log(currentProject.getTodos());
+            clearTodoInputs();
 
             renderTodos();
         });
@@ -38,14 +40,15 @@ const domeElements =(function() {
         let currentProject = projectManager.getCurrentProject();
         let todos = currentProject.getTodos();
         todos.forEach(todo => {
-            if (!todo.rendered) {
-                //todo.changeRenderedStatus(true);
+            if (!todo.getRenderedStatus()) {
+                console.log(todo.getIndex());
+               // console.log(todo.getRenderedStatus());
+                todo.changeRenderedStatus(true);
+               // console.log(todo.getRenderedStatus());
                 let todoDiv =createTodoDiv(todo);
                 todosDiv.appendChild(todoDiv);
             }
-        });
-    }
-    function createTodoDiv(newTodo) {
+  function createTodoDiv(newTodo) {
         let div = document.createElement("div");
         div.classList.add("individualTodo");
         const p1 = document.createElement("p");
@@ -54,7 +57,12 @@ const domeElements =(function() {
         const p4 = document.createElement("p");
         const deleteTodoButton = document.createElement("button");
         deleteTodoButton.classList.add("deleteTodo");
-        //deleteTodoButton.dataset.index = newTodo.getIndex();
+        deleteTodoButton.dataset.index = newTodo.getIndex(); 
+        deleteTodoButton.textContent = "Delete";
+        deleteTodoButton.addEventListener("click", (e)=> {
+            console.log("aha");
+            //dovrsit ovo
+        });
         p1.textContent = newTodo.getTitle();
         p2.textContent = newTodo.getDescription();
         p3.textContent = newTodo.getPriority();
@@ -62,15 +70,17 @@ const domeElements =(function() {
         div.appendChild(p1);
         div.appendChild(p2);
         div.appendChild(p3);
-        div.appendChild(p4);
-        div.appendChild(deleteTodoButton);
+        div.appendChild(p4); 
+        div.appendChild(deleteTodoButton); 
 
         return div;
+    }      });
     }
+    
     return {projectsDiv, todosDiv};
 })();
 
-const inputs = (function() {
+function getInputs() {
     let projectName = document.getElementById("projectName");
     let todoTitle = document.getElementById("todoTitle");
     let todoDescription = document.getElementById("todoDescription");
@@ -78,5 +88,12 @@ const inputs = (function() {
     let todoDeadline = document.getElementById("deadlineInput");
 
     return {projectName, todoTitle, todoDescription, todoPriority, todoDeadline}
-})();
-export {domeElements, inputs}
+}
+function clearTodoInputs() {
+    let inputs = getInputs();
+    inputs.todoTitle.value = "";
+    inputs.todoDescription.value = "";
+    inputs.todoPriority.selectedIndex = 1;
+    inputs.todoDeadline.value = "";
+}
+export {domeElements, getInputs}
