@@ -1,5 +1,7 @@
 import { domeElements} from "./dom";
 
+
+
 function bindEvents() {
     domeElements.newProjectButton.addEventListener("click", (e) => {
         //create a form

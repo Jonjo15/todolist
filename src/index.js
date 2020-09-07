@@ -33,15 +33,12 @@ const projectManager =(function() {
     //     todosArray.push(todo);
     //     //currentProject.addTodo(todo);
     // }
-    function viewCurrentProjectsTodos() {
+    function currentProjectTodoArray() {
         let todosArray = currentProject.getTodos();
-        todosArray.forEach((todo) => {
-            console.log(todo.getTitle());
-            console.log(todo.getDescription());
-        })
+        return todosArray;
     }
 
-    return {changeCurrentProject, addNewProject, deleteProject, viewProjects, getCurrentProject, viewCurrentProjectsTodos}
+    return {changeCurrentProject, addNewProject, deleteProject, viewProjects, getCurrentProject, currentProjectTodoArray}
 })();
 
 (function setDefaultProject(){
@@ -54,16 +51,20 @@ const projectManager =(function() {
 
 function getTodoFromInput() {
     //titleinput
+    let titleValue = inputs.todoTitle.value;
     //descriptioninuptu
+    let descriptionValue = inputs.todoDescription.value; 
     //priority, deadline
+    let priorityValue = inputs.todoPriority.value;
+    let deadlineValue = inputs.todoDeadline.value;
     //let todo = new Todo()
+    let todo = new Todo(titleValue, descriptionValue, priorityValue, deadlineValue);
+    return todo;
 }
 
 console.log(inputs.todoPriority.value);
-function render() {
-
-}
-
+ 
+export {getTodoFromInput, projectManager}
 //projectManager.viewProjects();
 //console.log(projectManager.getCurrentProject().getTodos()[0]);
 //projectManager.changeCurrentProject(0);
