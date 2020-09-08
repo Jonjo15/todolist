@@ -16,6 +16,7 @@ const projectManager =(function() {
 
     function deleteProject(index) {
         projects.splice(index, 1);
+        updateProjectIndices();
     }
 
     function viewProjects() {
@@ -36,8 +37,16 @@ const projectManager =(function() {
         let todosArray = currentProject.getTodos();
         return todosArray;
     }
+    function getProjectsArray() {
+        return projects;
+    }
+    function updateProjectIndices() {
+        projects.forEach((project, idx) => {
+            project.setIdx(idx);
+        });
+    }
 
-    return {changeCurrentProject, addNewProject, deleteProject, viewProjects, getCurrentProject, currentProjectTodoArray}
+    return {changeCurrentProject, addNewProject, deleteProject, viewProjects, getCurrentProject, currentProjectTodoArray, getProjectsArray}
 })();
 
 (function setDefaultProject(){
@@ -65,7 +74,7 @@ function getTodoFromInput() {
 
 function getProjectFromInput() {
     let inputs = getInputs();
-    return new Project(inputs.projectName);
+    return new Project(inputs.projectName.value);
 }
 
 //console.log(inputs.todoPriority.value);

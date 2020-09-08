@@ -19,12 +19,17 @@ function Todo(title, description, priority, deadline) {
 function Project(name) {
     //ovoo dovrsit!!!!!!!!!!!
     this.name = name
+    this.index;
     this.rendered = false;
     let todos = [];
     const getName = () => this.name;
     function getTodos() {
         return todos;
     }
+    const getIdx = () => this.index;
+    const setIdx = (idx) => this.index = idx;
+    const getRenderedStatus = () => this.rendered;
+    const changeRenderedStatus = (bool) => this.rendered = bool;
     function addTodo(todo) {
         todos.push(todo);
         todo.setIndex(todos.length -1);
@@ -39,7 +44,7 @@ function Project(name) {
         });
     }
 
-    return { getName, addTodo, removeTodo, getTodos}
+    return { getName, addTodo, removeTodo, getTodos, getRenderedStatus, changeRenderedStatus, getIdx, setIdx}
 }
 
 export {Todo, Project};

@@ -24,6 +24,7 @@ const domElements =(function() {
             //add it to the projectManager
             projectManager.addNewProject(project);
             //render it
+            renderProjects();
         });
         submitTodoButton.addEventListener("click", (e) => {
             //create todo Object
@@ -67,7 +68,7 @@ function renderTodos() {
             deleteTodoButton.textContent = "Delete";
             deleteTodoButton.addEventListener("click", (e)=> {
                 //console.log("aha");
-                removeTodo(div, e.target.dataset.index);
+                removeTodoDiv(div, e.target.dataset.index);
             });
             p1.textContent = newTodo.getTitle();
             p2.textContent = newTodo.getDescription();
@@ -83,7 +84,42 @@ function renderTodos() {
         }   
     });
 }
-function removeTodo(div, index) {
+function renderProjects() {
+    let projectsArray = projectManager.getProjectsArray();
+    projectsArray.forEach((project, index) => {
+        if (!project.getRenderedStatus()) {
+            console.log(project.getName());
+            project.changeRenderedStatus(true);
+            let projectDiv = createProjectDiv(project);
+            domElements.projectsDiv.appendChild(projectDiv);
+        }
+    })
+}
+function createProjectDiv(project) {
+    let div = document.createElement("div");
+    div.classList.add("individualProject");
+    const paraName = document.createElement("p");
+    paraName.textContent = project.getName();
+    const deleteProjectButton = document.createElement("button");
+    deleteProjectButton.classList.add("deleteProject");
+    div.dataset.index = project.getIdx();
+    deleteProjectButton.dataset.index = project.getIdx(); 
+    deleteProjectButton.textContent = "Delete";
+    deleteProjectButton.addEventListener("click", (e) => {
+        console.log("aha");
+        //removeProjectDiv(); and its todos;
+    });
+    div.appendChild(paraName);
+    div.appendChild(deleteProjectButton);
+
+    return div;
+}
+function removeProjectDiv(div, index) {
+    projectManager.deleteProject(index);
+    div.remove();
+    updateProjectDivButtonIndices();
+}
+function removeTodoDiv(div, index) {
     let currentProject = projectManager.getCurrentProject();
     console.log(currentProject.getTodos());
     currentProject.removeTodo(index);
@@ -91,6 +127,16 @@ function removeTodo(div, index) {
     div.remove();
     updateTodoDivIndices();
     updateButtonIndices();
+}
+function updateProjectDivButtonIndices() {
+    const projectDivs = document.querySelectorAll(".individualProject");
+    const buttons = document.querySelectorAll(".deleteProject");
+    projectDivs.forEach((projectDiv, index) => {
+        projectDiv.dataset.index = index;
+    });
+    buttons.forEach((button, index) =>{
+        button.dataset.index = index;
+    });
 }
 function updateTodoDivIndices() {
     const todoDivs = document.querySelectorAll(".individualTodo");
