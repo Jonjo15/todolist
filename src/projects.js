@@ -1,4 +1,4 @@
-import {Todo} from "./todos"
+/* import {Todo} from "./todos"
 function Project(name) {
     //ovoo dovrsit!!!!!!!!!!!
     this.name = name
@@ -19,4 +19,4 @@ function Project(name) {
     return { name, addTodo, removeTodo, getTodos}
 }
 
-export {Project};
+export {Project}; */

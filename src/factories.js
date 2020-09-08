@@ -31,7 +31,12 @@ function Project(name) {
     }
     function removeTodo(index) {
         todos.splice(index, 1);
-        //updateIndices();
+        updateIndices();
+    }
+    function updateIndices() {
+        todos.forEach((todo, index) => {
+            todo.setIndex(index);
+        });
     }
 
     return { getName, addTodo, removeTodo, getTodos}

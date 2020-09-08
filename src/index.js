@@ -1,6 +1,6 @@
 
 import {Todo, Project} from "./factories";
-import {domElements, getInputs} from "./dom"
+import {domElements, getInputs, renderTodos} from "./dom"
 const projectManager =(function() {
     let projects = [];
     
@@ -46,6 +46,7 @@ const projectManager =(function() {
     projectManager.addNewProject(defaultProject);
     projectManager.changeCurrentProject(0);
     projectManager.getCurrentProject().addTodo(defaultTodo);
+    renderTodos();
 })();
 
 function getTodoFromInput() {
@@ -62,9 +63,14 @@ function getTodoFromInput() {
     return todo;
 }
 
+function getProjectFromInput() {
+    let inputs = getInputs();
+    return new Project(inputs.projectName);
+}
+
 //console.log(inputs.todoPriority.value);
  
-export {getTodoFromInput, projectManager}
+export {getProjectFromInput ,getTodoFromInput , projectManager}
 //projectManager.viewProjects();
 //console.log(projectManager.getCurrentProject().getTodos()[0]);
 //projectManager.changeCurrentProject(0);
