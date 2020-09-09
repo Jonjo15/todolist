@@ -107,7 +107,16 @@ function createProjectDiv(project) {
     deleteProjectButton.textContent = "Delete";
     deleteProjectButton.addEventListener("click", (e) => {
         console.log("aha");
+        if (project.getCurrentProjectStatus()) {
+            //removeProjectDiv();
+            let individualTodos = document.querySelectorAll(".individualTodo");
+            individualTodos.forEach((todo) => {
+                todo.remove();
+            })
+        }
         //removeProjectDiv(); and its todos;
+        removeProjectDiv(div, project.getIdx());
+        projectManager.changeCurrentProject(0);
     });
     div.appendChild(paraName);
     div.appendChild(deleteProjectButton);
@@ -166,4 +175,4 @@ function clearTodoInputs() {
     inputs.todoPriority.selectedIndex = 1;
     inputs.todoDeadline.value = "";
 }
-export {domElements, getInputs, renderTodos}
+export {domElements, getInputs, renderTodos, renderProjects}

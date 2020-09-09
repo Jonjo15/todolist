@@ -1,6 +1,9 @@
 /* .project {
     display: none;
 } */
-.individualTodo {
+.individualTodo, .individualProject {
     border: 1px solid black;
+}
+.selected {
+    background-color: rgb(24, 226, 5);
 }

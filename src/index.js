@@ -1,17 +1,29 @@
 
 import {Todo, Project} from "./factories";
-import {domElements, getInputs, renderTodos} from "./dom"
+import {domElements, getInputs, renderTodos, renderProjects} from "./dom"
 const projectManager =(function() {
     let projects = [];
     
     let currentProject = projects[0]; 
 
     function changeCurrentProject(index) {
+        if (projects.length == 0) {
+            return;
+        }
+        if (projects.length > 1) {
+            let formerProject = getCurrentProject();
+            formerProject.setCurrentProjectStatus(false);
+        }
         currentProject = projects[index];
+        currentProject.setCurrentProjectStatus(true);
     }
 
     function addNewProject(prjct) {
         projects.push(prjct);
+        if (projects.length == 1) {
+            changeCurrentProject(0);
+        }
+        prjct.setIdx(projects.length -1);
     }
 
     function deleteProject(index) {
@@ -55,6 +67,8 @@ const projectManager =(function() {
     projectManager.addNewProject(defaultProject);
     projectManager.changeCurrentProject(0);
     projectManager.getCurrentProject().addTodo(defaultTodo);
+    renderProjects();
+    domElements.projectsDiv.querySelector(".individualProject").classList.add("selected");
     renderTodos();
 })();
 

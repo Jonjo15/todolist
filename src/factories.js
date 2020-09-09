@@ -22,6 +22,9 @@ function Project(name) {
     this.index;
     this.rendered = false;
     let todos = [];
+    this.currentProjectStatus;
+    const setCurrentProjectStatus = (bool) => this.currentProjectStatus = bool;
+    const getCurrentProjectStatus = () => this.currentProjectStatus;
     const getName = () => this.name;
     function getTodos() {
         return todos;
@@ -44,7 +47,7 @@ function Project(name) {
         });
     }
 
-    return { getName, addTodo, removeTodo, getTodos, getRenderedStatus, changeRenderedStatus, getIdx, setIdx}
+    return { getName, addTodo, removeTodo, getTodos, getRenderedStatus, changeRenderedStatus, getIdx, setIdx, setCurrentProjectStatus, getCurrentProjectStatus}
 }
 
 export {Todo, Project};
