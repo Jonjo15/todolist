@@ -107,21 +107,36 @@ function createProjectDiv(project) {
     deleteProjectButton.textContent = "Delete";
     deleteProjectButton.addEventListener("click", (e) => {
         console.log("aha");
-        if (project.getCurrentProjectStatus()) {
+        let isCurrentProject = project.getCurrentProjectStatus();
+        if (isCurrentProject) {
             //removeProjectDiv();
             let individualTodos = document.querySelectorAll(".individualTodo");
             individualTodos.forEach((todo) => {
                 todo.remove();
-            })
+            });
+            projectManager.changeCurrentProject(0);
+            addClassSelected(0);
         }
         //removeProjectDiv(); and its todos;
         removeProjectDiv(div, project.getIdx());
-        projectManager.changeCurrentProject(0);
+        addClassSelected(0);
     });
     div.appendChild(paraName);
     div.appendChild(deleteProjectButton);
 
     return div;
+}
+function addClassSelected(index) {
+    let projectDivs = document.querySelectorAll(".individualProject");
+    if (projectDivs.length == 0) {
+        return;
+    }
+    projectDivs.forEach((div) => {
+        if (div.classList.contains("selected")) {
+            div.classList.remove("selected");
+        }
+    });
+    projectDivs[index].classList.add("selected");
 }
 function removeProjectDiv(div, index) {
     projectManager.deleteProject(index);

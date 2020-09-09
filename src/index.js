@@ -16,6 +16,8 @@ const projectManager =(function() {
         }
         currentProject = projects[index];
         currentProject.setCurrentProjectStatus(true);
+        //addClassSelected(index);
+        //changeSelectedProjectClass(index)
     }
 
     function addNewProject(prjct) {
@@ -85,7 +87,17 @@ function getTodoFromInput() {
     let todo = new Todo(titleValue, descriptionValue, priorityValue, deadlineValue);
     return todo;
 }
-
+// function changeSelectedProjectClass(index) {
+//     let projectDivs = domElements.projectsDiv.querySelectorAll(".individualProject");
+//     console.log(projectDivs);
+//     /* projectDivs.forEach((div) => {
+//         if (div.classList.t("selected")) {
+//             div.classList.remove("selected");
+//         }
+        
+//     }); */
+//     projectDivs[index].classList.add("selected");
+// }
 function getProjectFromInput() {
     let inputs = getInputs();
     return new Project(inputs.projectName.value);
