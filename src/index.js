@@ -7,6 +7,7 @@ const projectManager =(function() {
     let currentProject = projects[0]; 
 
     function changeCurrentProject(index) {
+
         if (projects.length == 0) {
             return;
         }
@@ -25,7 +26,7 @@ const projectManager =(function() {
         if (projects.length == 1 && prjct.getRenderedStatus()) {
             changeCurrentProject(0);
         }
-        else {
+        else if (projects.length == 1) {
             renderProjects();
             changeCurrentProject(0);
         }

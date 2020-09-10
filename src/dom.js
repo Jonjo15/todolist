@@ -98,12 +98,18 @@ function renderProjects() {
 function createProjectDiv(project) {
     let div = document.createElement("div");
     div.classList.add("individualProject");
-    const paraName = document.createElement("p");
-    paraName.textContent = project.getName();
+    const switchButton = document.createElement("button");
+    switchButton.textContent = project.getName();
+    switchButton.classList.add("switchButton");
     const deleteProjectButton = document.createElement("button");
     deleteProjectButton.classList.add("deleteProject");
     div.dataset.index = project.getIdx();
+    /* div.addEventListener("click", (e) => {
+        let index = div.dataset.index;
+        projectManager.changeCurrentProject(index);
+    }); */
     deleteProjectButton.dataset.index = project.getIdx(); 
+    switchButton.dataset.index = project.getIdx();
     deleteProjectButton.textContent = "Delete";
     deleteProjectButton.addEventListener("click", (e) => {
         console.log("aha");
@@ -124,7 +130,11 @@ function createProjectDiv(project) {
         }
         //removeProjectDiv(); and its todos;
     });
-    div.appendChild(paraName);
+    switchButton.addEventListener("click", (e) => {
+        let index = e.target.dataset.index;
+        projectManager.changeCurrentProject(index);
+    });
+    div.appendChild(switchButton);
     div.appendChild(deleteProjectButton);
 
     return div;

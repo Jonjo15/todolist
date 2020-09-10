@@ -5,5 +5,11 @@
     border: 1px solid black;
 }
 .selected {
-    background-color: rgb(24, 226, 5);
+    background-color: 
+    rgb(24, 226, 5);
+}
+.switchButton {
+    border: none;
+    margin-left: 10px;
+    margin-right: 10px;
 }
