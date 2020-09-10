@@ -1,4 +1,4 @@
-import {getTodoFromInput, getProjectFromInput, projectManager} from "./index"
+import {getTodoFromInput, getProjectFromInput, projectManager, addClassSelected} from "./index"
 import {Todo, Project} from "./factories";
 
 const domElements =(function() {
@@ -108,35 +108,26 @@ function createProjectDiv(project) {
     deleteProjectButton.addEventListener("click", (e) => {
         console.log("aha");
         let isCurrentProject = project.getCurrentProjectStatus();
+        console.log(isCurrentProject);
         if (isCurrentProject) {
             //removeProjectDiv();
             let individualTodos = document.querySelectorAll(".individualTodo");
             individualTodos.forEach((todo) => {
                 todo.remove();
             });
+            removeProjectDiv(div, project.getIdx());
             projectManager.changeCurrentProject(0);
-            addClassSelected(0);
+            //addClassSelected(0);
+        }
+        else {
+            removeProjectDiv(div, project.getIdx());
         }
         //removeProjectDiv(); and its todos;
-        removeProjectDiv(div, project.getIdx());
-        addClassSelected(0);
     });
     div.appendChild(paraName);
     div.appendChild(deleteProjectButton);
 
     return div;
-}
-function addClassSelected(index) {
-    let projectDivs = document.querySelectorAll(".individualProject");
-    if (projectDivs.length == 0) {
-        return;
-    }
-    projectDivs.forEach((div) => {
-        if (div.classList.contains("selected")) {
-            div.classList.remove("selected");
-        }
-    });
-    projectDivs[index].classList.add("selected");
 }
 function removeProjectDiv(div, index) {
     projectManager.deleteProject(index);

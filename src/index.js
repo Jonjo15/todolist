@@ -16,13 +16,17 @@ const projectManager =(function() {
         }
         currentProject = projects[index];
         currentProject.setCurrentProjectStatus(true);
-        //addClassSelected(index);
+        addClassSelected(index);
         //changeSelectedProjectClass(index)
     }
 
     function addNewProject(prjct) {
         projects.push(prjct);
-        if (projects.length == 1) {
+        if (projects.length == 1 && prjct.getRenderedStatus()) {
+            changeCurrentProject(0);
+        }
+        else {
+            renderProjects();
             changeCurrentProject(0);
         }
         prjct.setIdx(projects.length -1);
@@ -67,10 +71,10 @@ const projectManager =(function() {
     let defaultProject = new Project("Default Project");
     let defaultTodo = new Todo("a", "b", "c", "d");
     projectManager.addNewProject(defaultProject);
-    projectManager.changeCurrentProject(0);
+    //renderProjects();
+    //projectManager.changeCurrentProject(0);
     projectManager.getCurrentProject().addTodo(defaultTodo);
-    renderProjects();
-    domElements.projectsDiv.querySelector(".individualProject").classList.add("selected");
+    //domElements.projectsDiv.querySelector(".individualProject").classList.add("selected");
     renderTodos();
 })();
 
@@ -86,6 +90,18 @@ function getTodoFromInput() {
     //let todo = new Todo()
     let todo = new Todo(titleValue, descriptionValue, priorityValue, deadlineValue);
     return todo;
+}
+function addClassSelected(index) {
+    if (!domElements.projectsDiv.hasChildNodes) {
+        return;
+    }
+    let projectDivs = document.querySelectorAll(".individualProject");
+    projectDivs.forEach((div) => {
+        if (div.classList.contains("selected")) {
+            div.classList.remove("selected");
+        }
+    });
+    projectDivs[index].classList.add("selected");
 }
 // function changeSelectedProjectClass(index) {
 //     let projectDivs = domElements.projectsDiv.querySelectorAll(".individualProject");
@@ -105,7 +121,7 @@ function getProjectFromInput() {
 
 //console.log(inputs.todoPriority.value);
  
-export {getProjectFromInput ,getTodoFromInput , projectManager}
+export {getProjectFromInput ,getTodoFromInput , projectManager, addClassSelected}
 //projectManager.viewProjects();
 //console.log(projectManager.getCurrentProject().getTodos()[0]);
 //projectManager.changeCurrentProject(0);

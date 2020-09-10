@@ -22,7 +22,7 @@ function Project(name) {
     this.index;
     this.rendered = false;
     let todos = [];
-    this.currentProjectStatus;
+    this.currentProjectStatus = false;
     const setCurrentProjectStatus = (bool) => this.currentProjectStatus = bool;
     const getCurrentProjectStatus = () => this.currentProjectStatus;
     const getName = () => this.name;
