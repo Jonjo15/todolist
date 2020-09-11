@@ -123,6 +123,7 @@ function createProjectDiv(project) {
             });
             removeProjectDiv(div, project.getIdx());
             projectManager.changeCurrentProject(0);
+            renderTodos();
             //addClassSelected(0);
         }
         else {
@@ -132,12 +133,33 @@ function createProjectDiv(project) {
     });
     switchButton.addEventListener("click", (e) => {
         let index = e.target.dataset.index;
+        let formerProject = projectManager.getCurrentProject();
         projectManager.changeCurrentProject(index);
+        switchCurrentProjectTodoDisplay(formerProject);
     });
     div.appendChild(switchButton);
     div.appendChild(deleteProjectButton);
 
     return div;
+}
+function switchCurrentProjectTodoDisplay(exProject) {
+    let currentProject = projectManager.getCurrentProject();
+    let numOfTodos = currentProject.getNumOfTodos();
+    if (numOfTodos == 0) {
+        let individualTodos = document.querySelectorAll(".individualTodo");
+            individualTodos.forEach((todo) => {
+            todo.remove();
+            exProject.setAllTodosNotRendered();
+        });
+    }
+    else {
+        let individualTodos = document.querySelectorAll(".individualTodo");
+            individualTodos.forEach((todo) => {
+            todo.remove();
+            exProject.setAllTodosNotRendered();
+        });
+        renderTodos();
+    }
 }
 function removeProjectDiv(div, index) {
     projectManager.deleteProject(index);
@@ -156,6 +178,10 @@ function removeTodoDiv(div, index) {
 function updateProjectDivButtonIndices() {
     const projectDivs = document.querySelectorAll(".individualProject");
     const buttons = document.querySelectorAll(".deleteProject");
+    const switchButtons = document.querySelectorAll(".switchButton");
+    switchButtons.forEach((button, index) => {
+        button.dataset.index = index;
+    })
     projectDivs.forEach((projectDiv, index) => {
         projectDiv.dataset.index = index;
     });

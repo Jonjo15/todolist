@@ -23,6 +23,7 @@ const projectManager =(function() {
 
     function addNewProject(prjct) {
         projects.push(prjct);
+        prjct.setIdx(projects.length -1);
         if (projects.length == 1 && prjct.getRenderedStatus()) {
             changeCurrentProject(0);
         }
@@ -30,7 +31,6 @@ const projectManager =(function() {
             renderProjects();
             changeCurrentProject(0);
         }
-        prjct.setIdx(projects.length -1);
     }
 
     function deleteProject(index) {

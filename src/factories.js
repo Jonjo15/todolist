@@ -23,6 +23,7 @@ function Project(name) {
     this.rendered = false;
     let todos = [];
     this.currentProjectStatus = false;
+    const getNumOfTodos = () => todos.length;
     const setCurrentProjectStatus = (bool) => this.currentProjectStatus = bool;
     const getCurrentProjectStatus = () => this.currentProjectStatus;
     const getName = () => this.name;
@@ -46,8 +47,15 @@ function Project(name) {
             todo.setIndex(index);
         });
     }
-
-    return { getName, addTodo, removeTodo, getTodos, getRenderedStatus, changeRenderedStatus, getIdx, setIdx, setCurrentProjectStatus, getCurrentProjectStatus}
+    function setAllTodosNotRendered() {
+        if (todos.length == 0) {
+            return;
+        }
+        todos.forEach((todo) => {
+            todo.changeRenderedStatus(false);
+        })
+    }
+    return { getName, getNumOfTodos, setAllTodosNotRendered , addTodo, removeTodo, getTodos, getRenderedStatus, changeRenderedStatus, getIdx, setIdx, setCurrentProjectStatus, getCurrentProjectStatus}
 }
 
 export {Todo, Project};
