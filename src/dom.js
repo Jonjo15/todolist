@@ -30,7 +30,12 @@ const domElements =(function() {
             //add it to the projectManager
             projectManager.addNewProject(project);
             //render it
+            console.log(project.getCurrentProjectStatus());
             renderProjects();
+           // let index = (projectManager.getNumOfProjects -1);
+            let formerProject = projectManager.getCurrentProject();
+            projectManager.changeCurrentProject(project.getIdx());
+            switchCurrentProjectTodoDisplay(formerProject);
             projectForm.style.display = "none";
             newProjectButton.style.display = "inline-block";
         });
@@ -69,7 +74,9 @@ function renderTodos() {
             const p1 = document.createElement("p");
             const p2 = document.createElement("p");
             const p3 = document.createElement("p");
+            p3.classList.add("hiddenInfo");
             const p4 = document.createElement("p");
+            p4.classList.add("hiddenInfo");
             const deleteTodoButton = document.createElement("button");
             deleteTodoButton.classList.add("deleteTodo");
             div.dataset.index = newTodo.getIndex();
@@ -88,6 +95,21 @@ function renderTodos() {
             div.appendChild(p3);
             div.appendChild(p4); 
             div.appendChild(deleteTodoButton); 
+
+            /* div.addEventListener("mouseenter", function( event ) {   
+                // highlight the mouseenter target
+                let hiddenParas = event.target.querySelectorAll(".hiddenInfo");
+                hiddenParas.forEach((para) => {
+                    para.style.display = "block";
+                });
+              
+                // reset the color after a short delay
+                setTimeout(function() {
+                    hiddenParas.forEach((para) => {
+                        para.style.display = "none";
+                    })
+                }, 500);
+              }, false); */
 
             return div;
         }   

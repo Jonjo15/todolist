@@ -1,7 +1,7 @@
 /* .project {
     display: none;
 } */
-.projectForm, .todoForm {
+.projectForm, .todoForm, .hiddenInfo {
     display: none;
 }
 .individualTodo, .individualProject {
@@ -19,3 +19,7 @@
 h1, h2 {
     text-align: center;
 }
+
+.individualTodo:hover  .hiddenInfo {
+    display: block;
+  }
