@@ -4,6 +4,8 @@ import {Todo, Project} from "./factories";
 const domElements =(function() {
     let projectsDiv = document.querySelector("#projects");
     let todosDiv = document.querySelector("#todos");
+    let projectForm = document.querySelector(".projectForm");
+    let todoForm = document.querySelector(".todoForm");
     let addNewTodoButton = document.querySelector("#newTodoButton");
     let newProjectButton = document.querySelector("#newProjectButton");
     let submitProjectButton = document.getElementById("submitProjectButton");
@@ -12,11 +14,15 @@ const domElements =(function() {
     (function bindEvents() {
         newProjectButton.addEventListener("click", (e) => {
             //create a form
-            console.log("blabalblablb")
+            clearProjectInput();
+            projectForm.style.display = "block";
+            newProjectButton.style.display = "none";
         });
     
         addNewTodoButton.addEventListener("click", (e) => {
             //create a form
+            todoForm.style.display = "block";
+            addNewTodoButton.style.display = "none";
         });
         submitProjectButton.addEventListener("click", (e) => {
             //create Project object
@@ -25,6 +31,8 @@ const domElements =(function() {
             projectManager.addNewProject(project);
             //render it
             renderProjects();
+            projectForm.style.display = "none";
+            newProjectButton.style.display = "inline-block";
         });
         submitTodoButton.addEventListener("click", (e) => {
             //create todo Object
@@ -33,7 +41,8 @@ const domElements =(function() {
             //add it to the currentProject todos
             let currentProject = projectManager.getCurrentProject();
             currentProject.addTodo(todo);
-            console.log(currentProject.getTodos());
+            todoForm.style.display = "none";
+            addNewTodoButton.style.display = "inline-block";
             clearTodoInputs();
 
             renderTodos();
@@ -70,10 +79,10 @@ function renderTodos() {
                 //console.log("aha");
                 removeTodoDiv(div, e.target.dataset.index);
             });
-            p1.textContent = newTodo.getTitle();
-            p2.textContent = newTodo.getDescription();
-            p3.textContent = newTodo.getPriority();
-            p4.textContent = newTodo.getDeadline();
+            p1.textContent ="Title: " + newTodo.getTitle();
+            p2.textContent = "Description: " + newTodo.getDescription();
+            p3.textContent = "Priority: " + newTodo.getPriority();
+            p4.textContent = "Deadline: " + newTodo.getDeadline();
             div.appendChild(p1);
             div.appendChild(p2);
             div.appendChild(p3);
@@ -216,5 +225,9 @@ function clearTodoInputs() {
     inputs.todoDescription.value = "";
     inputs.todoPriority.selectedIndex = 1;
     inputs.todoDeadline.value = "";
+}
+function clearProjectInput() {
+    let inputs = getInputs();
+    inputs.projectName.value = "";
 }
 export {domElements, getInputs, renderTodos, renderProjects}

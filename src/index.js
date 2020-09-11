@@ -64,8 +64,11 @@ const projectManager =(function() {
             project.setIdx(idx);
         });
     }
+    function getNumOfProjects() {
+        return projects.length
+    }
 
-    return {changeCurrentProject, addNewProject, deleteProject, viewProjects, getCurrentProject, currentProjectTodoArray, getProjectsArray}
+    return {changeCurrentProject,getNumOfProjects, addNewProject, deleteProject, viewProjects, getCurrentProject, currentProjectTodoArray, getProjectsArray}
 })();
 
 (function setDefaultProject(){
