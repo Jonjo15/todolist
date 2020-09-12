@@ -32,18 +32,18 @@
                     <input id="todoDescription" name="description" type="text" required>
                 </label>
                 <label for="priority">Priority : </label>
-                <select id="priorityInput" name="cars">
+                <select id="priorityInput" name="cars" required>
                     <option value="low">Low</option>
                     <option value="medium">Medium</option>
                     <option value="high">High</option>
                   </select>
                   <label for="deadline">Pick a deadline:</label>
-                  <input type="date" id="deadlineInput">
+                  <input type="date" id="deadlineInput" required>
                   <button type="button" id="todoSubmitButton">Submit</button>
             </form>
             <button id="newTodoButton">Add a Todo</button>
         </div>
-        
+
     </div>
     
     <script src="main.js"></script>

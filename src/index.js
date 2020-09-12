@@ -92,6 +92,9 @@ function getTodoFromInput() {
     let priorityValue = inputs.todoPriority.value;
     let deadlineValue = inputs.todoDeadline.value;
     //let todo = new Todo()
+    if (titleValue == "" || descriptionValue == "" || deadlineValue == "") {
+        return false;
+    }
     let todo = new Todo(titleValue, descriptionValue, priorityValue, deadlineValue);
     return todo;
 }
@@ -120,6 +123,9 @@ function addClassSelected(index) {
 // }
 function getProjectFromInput() {
     let inputs = getInputs();
+    if (inputs.projectName.value == "") {
+        return false;
+    }
     return new Project(inputs.projectName.value);
 }
 

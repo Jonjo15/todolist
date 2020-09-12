@@ -26,6 +26,9 @@ const domElements =(function() {
         });
         submitProjectButton.addEventListener("click", (e) => {
             //create Project object
+            if (!getProjectFromInput()) {
+                return alert("Fill in all the inputs!");
+            }
             let project = getProjectFromInput();
             //add it to the projectManager
             projectManager.addNewProject(project);
@@ -41,6 +44,9 @@ const domElements =(function() {
         });
         submitTodoButton.addEventListener("click", (e) => {
             //create todo Object
+            if (!getTodoFromInput()) {
+                return alert("Fill in all the inputs!");
+            }
             let todo = getTodoFromInput();
             console.log(todo.getTitle());
             //add it to the currentProject todos
