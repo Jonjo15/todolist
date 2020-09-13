@@ -1,6 +1,7 @@
 
 import {Todo, Project} from "./factories";
 import {domElements, getInputs, renderTodos, renderProjects} from "./dom"
+import {storage} from "./storage"
 const projectManager =(function() {
     let projects = [];
     
