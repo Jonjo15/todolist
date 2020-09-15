@@ -1,11 +1,25 @@
 /* .project {
     display: none;
 } */
+body {
+    background-color: silver;
+}
+#projects {
+    background-color: darkgray;
+    margin-right: 20px;
+}
+input, select {
+    display: block;
+}
+#todos {
+    background-color: rgb(103, 107, 101);
+}
 .projectForm, .todoForm, .hiddenInfo {
     display: none;
 }
 .individualTodo, .individualProject {
     border: 1px solid black;
+    background-color: rgb(150, 142, 136);
 }
 .selected {
     background-color: 
@@ -16,8 +30,9 @@
     margin-left: 10px;
     margin-right: 10px;
 }
-h1, h2 {
+h1, h2, p {
     text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .individualTodo:hover  .hiddenInfo {
@@ -26,6 +41,7 @@ h1, h2 {
 .individualProject {
     position: relative;
 }
+
 #content {
     display: grid;
     grid-template-columns: 50% 50%;
@@ -37,12 +53,13 @@ button {
     margin-right: 15px;
 }
 .add {
-    margin-left: 220px;
+    margin-left: 335px;
 }
 .deleteProject {
     position: absolute;
     right:0;
 }
+
 .switchButton {
     width: 100px;
 }
