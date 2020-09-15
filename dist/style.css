@@ -23,3 +23,26 @@ h1, h2 {
 .individualTodo:hover  .hiddenInfo {
     display: block;
   }
+.individualProject {
+    position: relative;
+}
+#content {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 100%;
+}
+
+button {
+    margin-left: 15px;
+    margin-right: 15px;
+}
+.add {
+    margin-left: 220px;
+}
+.deleteProject {
+    position: absolute;
+    right:0;
+}
+.switchButton {
+    width: 100px;
+}

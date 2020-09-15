@@ -1,4 +1,5 @@
 import {projectManager} from "./index"
+import {Todo, Project} from "./factories"
 
 const storage = (() => {
     let storeProjects = ()=>{
@@ -14,10 +15,10 @@ const storage = (() => {
         }
     }
 
-    //let getStored = ()=> localStorage.getItem("projects") ? true : false;
+    let getStored = ()=> localStorage.getItem("projects") ? true : false;
 
     return {
-        storeProjects,getProjects
+        storeProjects,getProjects, getStored
     };
 })();
 
